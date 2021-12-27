@@ -4,6 +4,8 @@ import Register from "./pages/Register";
 import { useState, useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import OthersProfile from "./pages/OthersProfile";
+import Inbox from "./pages/Inbox";
 
 function App() {
   const [loggedIn, setloggedIn] = useState(false);
@@ -15,15 +17,14 @@ function App() {
     }
   }
 
-  // let auth = userAuthenticated();
-  // console.log(auth);
-
   if (loggedIn) {
     return (
       <div className="App">
         <Routes>
           <Route path="/" exact element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/otherProfiles" element={<OthersProfile />} />
+          <Route path="/inbox" element={<Inbox />} />
         </Routes>
       </div>
     );

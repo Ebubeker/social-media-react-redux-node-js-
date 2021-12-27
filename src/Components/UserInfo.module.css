@@ -29,6 +29,34 @@
     margin-top: 5px;
 }
 
-.activityInfo{
+.activityInfo {
     text-align: center;
+}
+
+@media(max-width: 1444px) {
+    .content {
+        width: 69%;
+    }
+}
+
+@media(max-width: 938px) {
+    .content {
+        display: block;
+    }
+
+    .profileImage {
+        width: 100%;
+        text-align: center;
+    }
+
+    .BasicInfo {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 821px) {
+    .divider {
+        margin-top: 60px;
+    }
 }

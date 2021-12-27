@@ -5,9 +5,10 @@ import store from "../redux/store/store";
 import PostList from "../Components/PostList";
 import SuggestedList from "../Components/SuggestedList";
 import Footer from "../Components/Footer";
+import { useRef, useEffect } from "react";
 
 const Dashboard = () => {
-
+    
     let stor = JSON.parse(localStorage.reduxState);
 
     return (

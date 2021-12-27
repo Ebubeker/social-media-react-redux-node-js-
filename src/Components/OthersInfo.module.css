@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 60px;
-
+    margin-bottom: 30px;
 }
 
 .firstSide {
@@ -63,7 +63,7 @@
 }
 
 @media(max-width: 938px) {
-    .content{
+    .content {
         display: block;
     }
 

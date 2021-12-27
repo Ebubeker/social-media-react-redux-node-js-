@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 //import {userAuthenticated} from '../security/checkAuth';
 import axios from 'axios';
 import { useRef } from 'react';
+import React, {useEffect, useState} from 'react';
 
 
 const CreatePost = ({profileName, _id}) => {
@@ -21,7 +22,11 @@ const CreatePost = ({profileName, _id}) => {
             file: image.current.value,
             id: _id
         }      
-        
+
+        content.current.value = "";
+        tags.current.value = "";
+        image.current.value = "";
+
         axios.post('/login/postContent', Post);
     }
 

@@ -2,11 +2,8 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Post from '../Components/Post';
 import Navbar from '../Components/Navbar';
-import {content, firstSide, secondSide, h3design, followList, logout} from './Profile.module.css';
+import {content, firstSide, secondSide, h3design, followList, logout} from './OthersInfo.module.css';
 import { Link } from 'react-router-dom';
-import subscribe from '../redux/store/subscribe';
-import { loggOff } from '../redux/actions/actions';
-import store from '../redux/store/store';
 import UserInfo from '../Components/UserInfo';
 import SuggestedList from '../Components/SuggestedList';
 import Footer from '../Components/Footer';
@@ -15,8 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleDown } from '@fortawesome/free-regular-svg-icons';
 
 
-const Profile = () => {
-    let userId = JSON.parse(localStorage.reduxState).id;
+const OthersInfo = ({userClicked}) => {
 
     const [user, setUser] = useState([]);
     const [posts, setPosts] = useState([]);
@@ -24,22 +20,16 @@ const Profile = () => {
     let counter = 0;
 
     useEffect(() => {
-        axios.get(`/login/getuser/${userId}`)
+        axios.get(`/login/getuser/${userClicked._id}`)
         .then(response => {
             setUser(response.data);
         });
 
-        axios.get(`/login/postContent/${userId}`)
+        axios.get(`/login/postContent/${userClicked._id}`)
         .then(response => {
             setPosts(response.data);
         })
     }, [limit])
-
-    const loggOut = () => {
-        store.dispatch(loggOff());
-        subscribe();
-        history('/');
-    }
 
     const loadMorePosts = () =>{
         setLimit(limit + 5);
@@ -71,12 +61,9 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <Link className={logout} onClick={loggOut} to="/">
-                <p>LoggOut</p>
-            </Link>
             <Footer/>
         </div>
     )
 }
 
-export default Profile;
+export default OthersInfo
