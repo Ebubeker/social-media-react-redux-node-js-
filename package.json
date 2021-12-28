@@ -9,7 +9,7 @@
     "compress": true,
     "allowedHosts": "all"
   },
-  "proxy": "https://social-media-backend-2210.herokuapp.com/",
+  "proxy": "http://localhost:2000/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
