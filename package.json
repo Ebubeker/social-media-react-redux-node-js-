@@ -5,6 +5,10 @@
   "engines": {
     "node": "14.17.1"
   },
+  "devServer": {
+    "compress": true,
+    "allowedHosts": "all"
+  },
   "proxy": "https://social-media-backend-2210.herokuapp.com/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
