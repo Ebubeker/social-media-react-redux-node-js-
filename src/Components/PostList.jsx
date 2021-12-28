@@ -17,7 +17,7 @@ const PostList = ({name}) => {
     }
 
     useEffect(() => {
-        axios.get(`/login/postContent`)
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/postContent`)
         .then((result) => {
             setPosts(result.data)
         })

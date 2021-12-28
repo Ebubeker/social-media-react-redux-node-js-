@@ -16,11 +16,11 @@ const CommentSection = ({initialState, currentUser_Id, post}) => {
 
     useEffect(() => {
         setCommentIs(initialState);
-        axios.get(`/login/getuser`).then((resp)=> setUsers(resp.data));
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser`).then((resp)=> setUsers(resp.data));
     }, [initialState])
 
     useEffect(() => {
-        axios.get(`/login/getComments/${post._id}`).then((result)=>setAllComments(result.data)).catch((err)=> console.log(err));
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getComments/${post._id}`).then((result)=>setAllComments(result.data)).catch((err)=> console.log(err));
     }, [allComments]);
 
     const closeComment = () => {
@@ -39,7 +39,7 @@ const CommentSection = ({initialState, currentUser_Id, post}) => {
 
         commentContent.current.value = "";
 
-        axios.post('/login/comment', newComment);
+        axios.post('https://social-media-backend-2210.herokuapp.com/login/comment', newComment);
     }
 
     if(commentIs){

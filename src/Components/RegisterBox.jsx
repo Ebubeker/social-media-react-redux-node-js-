@@ -24,7 +24,7 @@ const LogInBox = () => {
                 password: password.current.value,
             }
     
-            axios.post('/login/createUser', newUser);
+            axios.post('https://social-media-backend-2210.herokuapp.com/login/createUser', newUser);
 
             window.location = '/';
         }else{

@@ -9,12 +9,12 @@ const Suggested = ({profileName, currentUser, userToFollow}) => {
     const [following, setFollowing] = useState(false)
     
     useEffect(() => {
-        axios.get(`/login/getuser/${currentUser.id}`).then((result) => setUser(result.data));
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser/${currentUser.id}`).then((result) => setUser(result.data));
 
     }, [])
     
     useEffect(() => {
-        axios.get(`/login/getuser/${currentUser.id}`).then((result) => setUser(result.data));
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser/${currentUser.id}`).then((result) => setUser(result.data));
         if(user.activity){
             const arr = user.activity.followingUsers;
             let checkIfFoll = false;

@@ -11,7 +11,7 @@ const Chat = () => {
     let stor = JSON.parse(localStorage.reduxState);
     
     useEffect(() => {
-        axios.get(`/login/getMessage/${stor.id} ${inboxUser._id}`).then((result)=>setMessagesSent(result.data));
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getMessage/${stor.id} ${inboxUser._id}`).then((result)=>setMessagesSent(result.data));
     }, [messagesSent])
 
     //Post a message

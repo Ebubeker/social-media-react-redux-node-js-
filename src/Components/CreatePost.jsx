@@ -27,7 +27,7 @@ const CreatePost = ({profileName, _id}) => {
         tags.current.value = "";
         image.current.value = "";
 
-        axios.post('/login/postContent', Post);
+        axios.post('https://social-media-backend-2210.herokuapp.com/login/postContent', Post);
     }
 
     return (

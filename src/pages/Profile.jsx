@@ -24,12 +24,12 @@ const Profile = () => {
     let counter = 0;
 
     useEffect(() => {
-        axios.get(`/login/getuser/${userId}`)
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser/${userId}`)
         .then(response => {
             setUser(response.data);
         });
 
-        axios.get(`/login/postContent/${userId}`)
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/postContent/${userId}`)
         .then(response => {
             setPosts(response.data);
         })

@@ -13,7 +13,7 @@ const LogInBox = () => {
     let history = useNavigate();
 
     const fetchData = () => {
-        axios.get(`/login/confirmAccount/${userInput.current.value}_${passwordInput.current.value}`)
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/confirmAccount/${userInput.current.value}_${passwordInput.current.value}`)
         .then((response)=>{
             const data = response.data;
             if(data.auth === true){

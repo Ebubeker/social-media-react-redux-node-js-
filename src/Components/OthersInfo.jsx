@@ -20,12 +20,12 @@ const OthersInfo = ({userClicked}) => {
     let counter = 0;
 
     useEffect(() => {
-        axios.get(`/login/getuser/${userClicked._id}`)
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser/${userClicked._id}`)
         .then(response => {
             setUser(response.data);
         });
 
-        axios.get(`/login/postContent/${userClicked._id}`)
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/postContent/${userClicked._id}`)
         .then(response => {
             setPosts(response.data);
         })

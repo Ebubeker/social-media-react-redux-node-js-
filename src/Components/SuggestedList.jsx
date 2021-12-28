@@ -9,7 +9,7 @@ const SuggestedList = ({name}) => {
     let current = JSON.parse(localStorage.reduxState);
 
     useEffect(() => {
-        axios.get('/login/getuser').then((result) => setUsers(result.data));
+        axios.get('https://social-media-backend-2210.herokuapp.com/login/getuser').then((result) => setUsers(result.data));
     }, [])
 
     return (

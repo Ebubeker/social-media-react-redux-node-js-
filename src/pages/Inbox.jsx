@@ -11,7 +11,7 @@ const Inbox = () => {
     let stor = JSON.parse(localStorage.reduxState);
 
     useEffect(() => {
-        axios.get(`/login/getuserExcept/${stor.id}`).then((result) => setUsers(result.data));
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuserExcept/${stor.id}`).then((result) => setUsers(result.data));
     }, [])
     console.log(users);
 

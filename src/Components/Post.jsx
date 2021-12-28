@@ -17,7 +17,7 @@ const Post = ({profileName, post}) => {
     const [allComments, setAllComments] = useState([]);
     
     useEffect(() => {
-        axios.get(`/login/getuser/${post.user_id}`)
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser/${post.user_id}`)
         .then((response)=>{
             // console.log(response)
             setUser(response.data);
@@ -37,7 +37,7 @@ const Post = ({profileName, post}) => {
             setLiked('rgb(90, 90, 90)');
         }
 
-        axios.get(`/login/getComments/${post._id}`).then((result)=>setAllComments(result.data)).catch((err)=> console.log(err));
+        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getComments/${post._id}`).then((result)=>setAllComments(result.data)).catch((err)=> console.log(err));
 
     }, [commentIs, allComments])
 
@@ -51,7 +51,7 @@ const Post = ({profileName, post}) => {
                 whatToDo: 'unlike'
             }
 
-            axios.post('/login/update', LikeUpdate);
+            axios.post('https://social-media-backend-2210.herokuapp.com/login/update', LikeUpdate);
             setLiked('rgb(90, 90, 90)');
         }else{
             let LikeUpdate = {
@@ -62,7 +62,7 @@ const Post = ({profileName, post}) => {
                 whatToDo: 'like'
             }
     
-            axios.post('/login/update', LikeUpdate);
+            axios.post('https://social-media-backend-2210.herokuapp.com/login/update', LikeUpdate);
             setLiked('red');
         }
     }
