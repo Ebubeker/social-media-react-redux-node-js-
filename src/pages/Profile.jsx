@@ -38,7 +38,7 @@ const Profile = () => {
     const loggOut = () => {
         store.dispatch(loggOff());
         subscribe();
-        history('/');
+        window.location('/');
     }
 
     const loadMorePosts = () =>{
