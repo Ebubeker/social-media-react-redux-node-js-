@@ -1,10 +1,9 @@
 import {input, btn, containerforall, h3Design, contentCreationDiv} from './CreatePost.module.css';
 import ModuleCss from '../Components/Navbar.module.css';
 import { Link } from 'react-router-dom';
-//import {userAuthenticated} from '../security/checkAuth';
 import axios from 'axios';
 import { useRef } from 'react';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 
 const CreatePost = ({profileName, _id}) => {

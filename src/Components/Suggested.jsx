@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {section, profile, followBtn, profilename, li} from './Suggested.module.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { getOneUser } from '../server/login and registration/user';
 
 const Suggested = ({profileName, currentUser, userToFollow}) => {
 
@@ -9,12 +10,17 @@ const Suggested = ({profileName, currentUser, userToFollow}) => {
     const [following, setFollowing] = useState(false)
     
     useEffect(() => {
-        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser/${currentUser.id}`).then((result) => setUser(result.data));
+        getOneUser(currentUser.id).then((resu)=>{
+            if(resu.result){
+                setUser(resu.user);
+            }else{
+                setUser({})
+            }
+        })
 
     }, [])
     
     useEffect(() => {
-        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser/${currentUser.id}`).then((result) => setUser(result.data));
         if(user.activity){
             const arr = user.activity.followingUsers;
             let checkIfFoll = false;
@@ -40,7 +46,7 @@ const Suggested = ({profileName, currentUser, userToFollow}) => {
             followed: userToFollow,
         }
 
-        axios.post('/login/follow', updated);
+        followSomeone(updated);
     }
 
     return (

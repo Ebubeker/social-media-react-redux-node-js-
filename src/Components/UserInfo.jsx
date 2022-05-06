@@ -1,13 +1,10 @@
-import axios from 'axios';
-import React from 'react'
-import { useEffect, useState } from 'react';
+import React from 'react';
 import {content, profileImage, BasicInfo, activityInfo} from './UserInfo.module.css';
 
-const UserInfo = ({user, activity}) => {
+const UserInfo = ({user}) => {
 
 
     if(user.activity){
-        console.log(user.activity)
         return (
             <section>
                 <div className={content}>
@@ -42,6 +39,7 @@ const UserInfo = ({user, activity}) => {
             <div>Loading...</div>
         )
     }
+
 }
 
 export default UserInfo

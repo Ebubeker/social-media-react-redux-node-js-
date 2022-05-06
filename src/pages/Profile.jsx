@@ -13,6 +13,8 @@ import Footer from '../Components/Footer';
 import {icons, messageBox, loadMoreBtn} from '../Components/PostList.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleDown } from '@fortawesome/free-regular-svg-icons';
+import { getOneUser } from '../server/login and registration/user';
+import { getUserPosts } from '../server/posts/posts';
 
 
 const Profile = () => {
@@ -24,16 +26,22 @@ const Profile = () => {
     let counter = 0;
 
     useEffect(() => {
-        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser/${userId}`)
-        .then(response => {
-            setUser(response.data);
-        });
-
-        axios.get(`https://social-media-backend-2210.herokuapp.com/login/postContent/${userId}`)
-        .then(response => {
-            setPosts(response.data);
+        getOneUser(userId).then((resu)=>{
+            if(resu.result){
+                setUser(resu.user);
+            }else{
+                setUser([])
+            }
         })
-    }, [limit])
+
+        getUserPosts(userId).then((resu)=>{
+            if(resu.result){
+                setPosts(resu.posts);
+            }else{
+                setPosts([])
+            }
+        })
+    }, [userId, limit])
 
     const loggOut = () => {
         store.dispatch(loggOff());

@@ -13,7 +13,6 @@ const Inbox = () => {
     useEffect(() => {
         axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuserExcept/${stor.id}`).then((result) => setUsers(result.data));
     }, [])
-    console.log(users);
 
     return (
         <InboxProvider>

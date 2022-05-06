@@ -2,17 +2,20 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Post from '../Components/Post';
 import Navbar from '../Components/Navbar';
-import {content, firstSide, secondSide, h3design, followList, logout} from './OthersInfo.module.css';
-import { Link } from 'react-router-dom';
+import {content, firstSide, secondSide, h3design, followList} from './OthersInfo.module.css';
 import UserInfo from '../Components/UserInfo';
 import SuggestedList from '../Components/SuggestedList';
 import Footer from '../Components/Footer';
 import {icons, messageBox, loadMoreBtn} from '../Components/PostList.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleDown } from '@fortawesome/free-regular-svg-icons';
+import { getOneUser } from '../server/login and registration/user';
+import { getUserPosts } from '../server/posts/posts';
 
 
 const OthersInfo = ({userClicked}) => {
+
+    let stor = JSON.parse(localStorage.reduxState);
 
     const [user, setUser] = useState([]);
     const [posts, setPosts] = useState([]);
@@ -20,16 +23,22 @@ const OthersInfo = ({userClicked}) => {
     let counter = 0;
 
     useEffect(() => {
-        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser/${userClicked._id}`)
-        .then(response => {
-            setUser(response.data);
-        });
-
-        axios.get(`https://social-media-backend-2210.herokuapp.com/login/postContent/${userClicked._id}`)
-        .then(response => {
-            setPosts(response.data);
+        getOneUser(userClicked._id).then((resu)=>{
+            if(resu.result){
+                setUser(resu.user);
+            }else{
+                setUser([])
+            }
         })
-    }, [limit])
+
+        getUserPosts(userClicked._id).then((resu)=>{
+            if(resu.result){
+                setPosts(resu.posts);
+            }else{
+                setPosts([])
+            }
+        })
+    }, [user, limit])
 
     const loadMorePosts = () =>{
         setLimit(limit + 5);
@@ -37,7 +46,7 @@ const OthersInfo = ({userClicked}) => {
 
     return (
         <div>
-            <Navbar profileName={user.username}></Navbar>
+            <Navbar profileName={stor.username}></Navbar>
             <div className={content}>
                 <div className={firstSide}>
                     <h1 className={h3design}>User Information</h1>

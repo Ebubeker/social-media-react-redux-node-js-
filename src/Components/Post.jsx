@@ -1,14 +1,16 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 import {cardPost, image, interactionIcons, postContent, section, icon, date} from './Post.module.css';
 import ModuleCss from '../Components/Navbar.module.css';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import CommentSection from '../Components/CommentSection';
-import {CommentProvider, CommentContext } from '../contexts/CommentContext';
+import {CommentProvider } from '../contexts/CommentContext';
+import { getOneUser } from '../server/login and registration/user';
+import { getComments } from '../server/posts/posts';
+import { updateLike } from '../server/posts/posts';
 
-const Post = ({profileName, post}) => {
+const Post = ({ post }) => {
 
     const userLoggedIn = JSON.parse(localStorage.reduxState);
     const [user, setUser] = useState('');
@@ -17,12 +19,14 @@ const Post = ({profileName, post}) => {
     const [allComments, setAllComments] = useState([]);
     
     useEffect(() => {
-        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getuser/${post.user_id}`)
-        .then((response)=>{
-            // console.log(response)
-            setUser(response.data);
-        })
 
+        getOneUser(post.user_id).then((resu)=>{
+            if(resu.result){
+                setUser(resu.user);
+            }else{
+                setUser([]);
+            }
+        })
         
         //check if you liked a post
         const likedtheposts = post.activity.usersLiking;
@@ -37,34 +41,20 @@ const Post = ({profileName, post}) => {
             setLiked('rgb(90, 90, 90)');
         }
 
-        axios.get(`https://social-media-backend-2210.herokuapp.com/login/getComments/${post._id}`).then((result)=>setAllComments(result.data)).catch((err)=> console.log(err));
+        getComments(post._id).then((resu)=>{
+            if(resu.result){
+                setAllComments(resu.comments)
+            }else{
+                setAllComments([])
+            }
+        })
 
     }, [commentIs, allComments])
 
     const like = ()=>{
-        if(liked === 'red'){
-            let LikeUpdate = {
-                id: post._id,
-                newLikes: post.activity.likes - 1,
-                userCurrent: userLoggedIn.id,
-                currentLikedList: post.activity.usersLiking,
-                whatToDo: 'unlike'
-            }
-
-            axios.post('https://social-media-backend-2210.herokuapp.com/login/update', LikeUpdate);
-            setLiked('rgb(90, 90, 90)');
-        }else{
-            let LikeUpdate = {
-                id: post._id,
-                newLikes: post.activity.likes + 1,
-                userCurrent: userLoggedIn.id,
-                currentLikedList: post.activity.usersLiking,
-                whatToDo: 'like'
-            }
-    
-            axios.post('https://social-media-backend-2210.herokuapp.com/login/update', LikeUpdate);
-            setLiked('red');
-        }
+        updateLike(userLoggedIn, liked, post).then((resu)=>{
+            setLiked(resu.newColor)
+        })
     }
 
     const commentsOpen = () => {

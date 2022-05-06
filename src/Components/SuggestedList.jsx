@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import Suggested from './Suggested';
 import {containerOfContent, h3withborder} from './SuggestedList.module.css';
+import { getusers } from '../server/login and registration/user';
 
 const SuggestedList = ({name}) => {
 
@@ -9,8 +9,14 @@ const SuggestedList = ({name}) => {
     let current = JSON.parse(localStorage.reduxState);
 
     useEffect(() => {
-        axios.get('https://social-media-backend-2210.herokuapp.com/login/getuser').then((result) => setUsers(result.data));
-    }, [])
+        getusers().then((resu)=>{
+            if(resu.result){
+                setUsers(resu.users);
+            }else{
+                setUsers([])
+            }
+        })
+    }, [users])
 
     return (
         <div >
